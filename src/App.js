@@ -14,14 +14,11 @@ function App() {
     const endpoint = '/findByIngredients';
     const urlToFetch = `${apiURLBase}${endpoint}?apiKey=${apiKey}&ingredients=${ingredients}&number=5`;
     
-
     try {
       const response = await axios.get(urlToFetch);
       setRecipes(response.data);
-      console.log(setRecipes);
     } catch (error) {
       console.error("Error fetching data:", error);
-      alert("Data cannot be fetched, sorry");
     }
   };
 
@@ -29,9 +26,10 @@ function App() {
     <div className="App">
       <h1>What's in your fridge?</h1>
       <SearchForm onSearch={handleSearchByIngredients} />
+      <RecipeList recipes={recipes} />
     </div>
   );
-}
+};
 
 export default App;
 
