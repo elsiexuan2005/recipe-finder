@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import axios from 'axios';
+import React, { useState } from 'react';
 import './App.css';
+import SearchForm from './SearchForm';
+
+const apiKey = process.env.REACT_APP_API_KEY;
+console.log(apiKey);
+const apiURLBase = 'https://api.spoonacular.com/recipes';
 
 function App() {
+  const [recipes, setRecipes] = useState([]);
+
+  const handleSearchByIngredients = async (ingredients) => {
+    const endpoint = '/findByIngredients';
+    const urlToFetch = `${apiURLBase}${endpoint}?apiKey=${apiKey}&ingredients=${ingredients}&number=5`;
+    
+
+    try {
+      const response = await axios.get(urlToFetch);
+      setRecipes(response.data);
+      console.log(setRecipes);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      alert("Data cannot be fetched, sorry");
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>What's in your fridge?</h1>
+      <SearchForm onSearch={handleSearchByIngredients} />
     </div>
   );
 }
 
 export default App;
+
+
