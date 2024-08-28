@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import './App.css';
 import SearchForm from './SearchForm';
+import RecipeList from './RecipeList';
 
 const apiKey = process.env.REACT_APP_API_KEY;
 console.log(apiKey);
