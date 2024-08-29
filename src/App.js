@@ -1,11 +1,11 @@
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React, { useState } from 'react';
 import './App.css';
 import SearchForm from './SearchForm';
 import RecipeList from './RecipeList';
-
+import RecipeInstruction from './RecipeInstruction';
 const apiKey = process.env.REACT_APP_API_KEY;
-console.log(apiKey);
 const apiURLBase = 'https://api.spoonacular.com/recipes';
 
 function App() {
@@ -24,13 +24,18 @@ function App() {
   };
 
   return (
+    <Router>
     <div className="App">
       <h1>What's in your fridge?</h1>
       <SearchForm onSearch={handleSearchByIngredients} />
-      <RecipeList recipes={recipes} />
+      <Routes>
+          <Route path="/" element={<RecipeList recipes={recipes} />} />
+          <Route path="/instructions/:id" element={<RecipeInstruction />} />
+      </Routes>
     </div>
+  </Router>
   );
-};
+}
 
 export default App;
 
