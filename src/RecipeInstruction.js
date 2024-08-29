@@ -1,5 +1,5 @@
 import React from 'react';
-const recipeInstruction = ({recipe}) => {
+const RecipeInstruction = ({recipe}) => {
     const { title, servings, ingredients, instruction} = recipe;
     return (
         <div className='instruction'>
@@ -17,3 +17,4 @@ const recipeInstruction = ({recipe}) => {
         </div>
     )   
 }
+export default RecipeInstruction;
